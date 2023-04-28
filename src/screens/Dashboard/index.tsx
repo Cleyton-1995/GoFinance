@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import { Container, Title } from './styles';
 
 interface Props {
    title: string;
@@ -7,8 +8,8 @@ interface Props {
 
 export function Dashboard({title}: Props) {
   return (
-    <View>
-      <Text>{title}</Text>
-    </View>
+    <Container>
+      <Title>{title}</Title>
+    </Container>
   );
 }

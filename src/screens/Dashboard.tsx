@@ -5,7 +5,7 @@ interface Props {
    title: string;
 }
 
-export function Welcome({title}: Props) {
+export function Dashboard({title}: Props) {
   return (
     <View>
       <Text>{title}</Text>

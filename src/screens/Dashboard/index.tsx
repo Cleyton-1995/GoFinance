@@ -11,6 +11,7 @@ import {
   UserName,
   UserWrapper,
 } from "./styles";
+import { HeihLightCard } from "../../HeihLightCard";
 
 export function Dashboard() {
   return (
@@ -27,6 +28,7 @@ export function Dashboard() {
           <Icon name="power" />
         </UserWrapper>
       </Header>
+      <HeihLightCard/>
     </Container>
   );
 }

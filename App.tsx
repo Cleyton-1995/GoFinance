@@ -24,7 +24,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Dashboard title="Boas Vindas" />
+      <Dashboard />
       <StatusBar style="auto" />
     </ThemeProvider>
   );

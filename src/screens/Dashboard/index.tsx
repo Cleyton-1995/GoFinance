@@ -3,6 +3,7 @@ import { Text, View } from "react-native";
 import {
   Container,
   Header,
+  Icon,
   Photo,
   User,
   UserGreeting,
@@ -23,6 +24,7 @@ export function Dashboard() {
               <UserName>Cleyton</UserName>
             </User>
           </UserInfo>
+          <Icon name="power" />
         </UserWrapper>
       </Header>
     </Container>

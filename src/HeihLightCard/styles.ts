@@ -9,20 +9,28 @@ export const Container = styled.View`
    padding-bottom: 42px;
 `
 export const Title = styled.Text`
-   
+  font-family: ${({theme}) => theme.fonts.regular};
+  font-size: 14px;
+  color: ${({theme}) => theme.colors.text_dark}; 
 `
 export const Header = styled.View`
-   
+   flex-direction: row;
+   justify-content: space-between;
 `
 export const Amount = styled.Text`
-   
+  font-family: ${({theme}) => theme.fonts.medium};
+  font-size: 32px;
+  color: ${({theme}) => theme.colors.text_dark};
+  margin-top: 38px;
 `
 export const LasTransaction = styled.Text`
-   
+   font-family: ${({theme}) => theme.fonts.regular};
+  font-size: 12px;
+  color: ${({theme}) => theme.colors.text};
 `
 export const Footer = styled.View`
    
 `
 export const Icon = styled(Feather)`
-   
-`
+   font-size: 40px;
+` 

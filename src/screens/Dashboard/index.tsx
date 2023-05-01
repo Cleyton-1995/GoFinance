@@ -1,5 +1,11 @@
 import React from "react";
 import { Text, View } from "react-native";
+import { HeihLightCard } from "../../Components/HeihLightCard";
+import {
+  TransactionsCards,
+  TransactionsCardsProps,
+} from "../../Components/TransactionsCards";
+import { getBottomSpace } from "react-native-iphone-x-helper";
 import {
   Container,
   Header,
@@ -15,13 +21,16 @@ import {
   Title,
   TransactionList,
 } from "./styles";
-import { HeihLightCard } from "../../Components/HeihLightCard";
-import { TransactionsCards } from "../../Components/TransactionsCards";
-import { getBottomSpace } from "react-native-iphone-x-helper";
+
+export interface DataListPros extends TransactionsCardsProps {
+  id: string;
+}
 
 export function Dashboard() {
-  const data = [
+  const data: DataListPros[] = [
     {
+      id: "1",
+      type: "positive",
       title: "Desenvolvimento de site",
       amount: "R$ 12.000,00",
       category: {
@@ -31,20 +40,24 @@ export function Dashboard() {
       date: "13/04/2020",
     },
     {
-      title: "Desenvolvimento de site",
-      amount: "R$ 12.000,00",
+      id: "2",
+      type: "negative",
+      title: "Hamburgeria Pizzy",
+      amount: "R$ 59,00",
       category: {
-        name: "Vendas",
-        icon: "dollar-sign",
+        name: "Alimentação",
+        icon: "coffe",
       },
       date: "13/04/2020",
     },
     {
-      title: "Desenvolvimento de site",
-      amount: "R$ 12.000,00",
+      id: "3",
+      type: "negative",
+      title: "Aluguel do apartaemnto",
+      amount: "R$ 1.200,00",
       category: {
-        name: "Vendas",
-        icon: "dollar-sign",
+        name: "casa",
+        icon: "shopping-bag",
       },
       date: "13/04/2020",
     },
@@ -90,11 +103,8 @@ export function Dashboard() {
         <Title>Listagem</Title>
         <TransactionList
           data={data}
+          keyExtractor={(item) => item.id}
           renderItem={({ item }) => <TransactionsCards data={item} />}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{
-            paddingBottom: getBottomSpace()
-          }}
         />
       </Transactions>
     </Container>

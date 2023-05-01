@@ -11,6 +11,8 @@ import {
   UserName,
   UserWrapper,
   HeihLightCards,
+  Transactions,
+  Title
 } from "./styles";
 import { HeihLightCard } from "../../HeihLightCard";
 
@@ -50,6 +52,10 @@ export function Dashboard() {
           lastTransaction="01 à 16 de abril"
         />
       </HeihLightCards>
+
+      <Transactions>
+        <Title>Listagem</Title>
+      </Transactions>
     </Container>
   );
 }

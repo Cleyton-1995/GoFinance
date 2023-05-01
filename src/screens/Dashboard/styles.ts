@@ -67,4 +67,5 @@ export const Transactions = styled.View`
 export const Title = styled.Text`
   font-size: 18px;
   font-family: ${({ theme }) => theme.fonts.regular};
+  margin-bottom: 16px;
 `;

@@ -12,9 +12,10 @@ import {
   UserWrapper,
   HeihLightCards,
   Transactions,
-  Title
+  Title,
 } from "./styles";
-import { HeihLightCard } from "../../HeihLightCard";
+import { HeihLightCard } from "../../Components/HeihLightCard";
+import { TransactionsCards } from "../../Components/TransactionsCards";
 
 export function Dashboard() {
   return (
@@ -55,6 +56,7 @@ export function Dashboard() {
 
       <Transactions>
         <Title>Listagem</Title>
+        <TransactionsCards />
       </Transactions>
     </Container>
   );

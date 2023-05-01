@@ -1,4 +1,5 @@
 import { Feather } from "@expo/vector-icons";
+import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import styled from "styled-components/native";
 
 export const Container = styled.View`
@@ -8,10 +9,10 @@ export const Container = styled.View`
 
 export const Header = styled.View`
   width: 100%;
-  height: 278px;
+  height: 300px;
   background-color: ${({ theme }) => theme.colors.primmary};
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: row;
 `;
 export const UserWrapper = styled.View`
@@ -20,6 +21,7 @@ export const UserWrapper = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-top: ${getStatusBarHeight() + 28};
 `;
 export const UserInfo = styled.View`
   flex-direction: row;
@@ -51,4 +53,8 @@ export const HeihLightCards = styled.ScrollView.attrs({
   horizontal: true,
   showsHorizontalScrollIndicator: false,
   contentContainerStyle: { paddingHorizontal: 24 }
-})``
+})`
+  width: 100%;
+  position: absolute;
+  margin-top: 130px;
+`;

@@ -47,3 +47,4 @@ export const Icon = styled(Feather)`
   color: ${({ theme }) => theme.colors.secundary};
   font-size: 24px;
 `;
+export const HeihLightCards = styled.ScrollView``

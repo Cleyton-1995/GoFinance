@@ -10,6 +10,7 @@ import {
   UserInfo,
   UserName,
   UserWrapper,
+  HeihLightCards,
 } from "./styles";
 import { HeihLightCard } from "../../HeihLightCard";
 
@@ -28,7 +29,11 @@ export function Dashboard() {
           <Icon name="power" />
         </UserWrapper>
       </Header>
-      <HeihLightCard/>
+      <HeihLightCards horizontal showsHorizontalScrollIndicator={false}>
+        <HeihLightCard />
+        <HeihLightCard />
+        <HeihLightCard />
+      </HeihLightCards>
     </Container>
   );
 }

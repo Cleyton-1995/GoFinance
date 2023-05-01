@@ -47,4 +47,8 @@ export const Icon = styled(Feather)`
   color: ${({ theme }) => theme.colors.secundary};
   font-size: 24px;
 `;
-export const HeihLightCards = styled.ScrollView``
+export const HeihLightCards = styled.ScrollView.attrs({
+  horizontal: true,
+  showsHorizontalScrollIndicator: false,
+  contentContainerStyle: { paddingHorizontal: 24 }
+})``

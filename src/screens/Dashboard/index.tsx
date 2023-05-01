@@ -29,7 +29,8 @@ export function Dashboard() {
           <Icon name="power" />
         </UserWrapper>
       </Header>
-      <HeihLightCards horizontal showsHorizontalScrollIndicator={false}>
+      
+      <HeihLightCards>
         <HeihLightCard />
         <HeihLightCard />
         <HeihLightCard />

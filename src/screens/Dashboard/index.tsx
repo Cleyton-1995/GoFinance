@@ -17,7 +17,7 @@ import {
 import { HeihLightCard } from "../../Components/HeihLightCard";
 import { TransactionsCards, TransactionsCardsProps } from "../../Components/TransactionsCards";
 
-interface DataListProsp extends TransactionsCardsProps {
+export interface DataListProsp extends TransactionsCardsProps {
   id: string;
 }
 

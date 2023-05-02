@@ -1,5 +1,4 @@
 import React from "react";
-import { Text, View } from "react-native";
 import {
   Container,
   Header,
@@ -31,19 +30,19 @@ export function Dashboard() {
       date: "13/04/2020",
     },
     {
-      title: "Desenvolvimento de site",
-      amount: "R$ 12.000,00",
+      title: "Hamburgueria Pizzy",
+      amount: " R$ 59,00",
       category: {
-        name: "Vendas",
-        icon: "dollar-sign",
+        name: "Alimentação",
+        icon: "coffee",
       },
       date: "13/04/2020",
     },
     {
-      title: "Desenvolvimento de site",
-      amount: "R$ 12.000,00",
+      title: "Aluguel do apartamento",
+      amount: "R$ 1.200,00",
       category: {
-        name: "Vendas",
+        name: "Casa",
         icon: "dollar-sign",
       },
       date: "13/04/2020",
@@ -91,10 +90,6 @@ export function Dashboard() {
         <TransactionList
           data={data}
           renderItem={({ item }) => <TransactionsCards data={item} />}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{
-            paddingBottom: getBottomSpace()
-          }}
         />
       </Transactions>
     </Container>

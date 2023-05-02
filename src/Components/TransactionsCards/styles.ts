@@ -1,6 +1,10 @@
 import { Feather } from "@expo/vector-icons";
 import styled from "styled-components/native";
 
+interface TransactionProps {
+  type: "positive" | "negative";
+}
+
 export const Container = styled.View`
   background-color: ${({ theme }) => theme.colors.shape};
   border-radius: 5px;
@@ -13,8 +17,9 @@ export const Title = styled.Text`
   font-size: 14px;
 `;
 
-export const Amount = styled.Text`
+export const Amount = styled.Text<TransactionProps>`
   font-family: ${({ theme }) => theme.fonts.regular};
+  color: ${({ theme, type }) => type === "positive" ? theme.colors.success : theme.colors.attention};
   font-size: 20px;
   margin-top: 2px;
 `;

@@ -10,7 +10,7 @@ import {
   Title,
 } from "./styles";
 
-interface Category {
+interface CategoryProps {
   name: string;
   icon: string;
 }
@@ -19,7 +19,7 @@ export interface TransactionsCardsProps {
   type: "positive" | "negative";
   title: string;
   amount: string;
-  category: Category;
+  category: CategoryProps;
   date: string;
 }
 
@@ -34,7 +34,12 @@ export function TransactionsCards({ data }: Props) {
 
       <Amount type={data.type}>
         {data.type === "negative" && "- "}
+<<<<<<< HEAD
         {data.amount}</Amount>
+=======
+        {data.amount}
+      </Amount>
+>>>>>>> 8593af8b50935e370ac85ed1d909100c0be49ba7
 
       <Footer>
         <Category>

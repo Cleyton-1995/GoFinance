@@ -1,18 +1,11 @@
 import { Feather } from "@expo/vector-icons";
-<<<<<<< HEAD
 import { FlatList } from "react-native";
-import { getBottomSpace, getStatusBarHeight } from "react-native-iphone-x-helper";
-=======
 import {
   getBottomSpace,
   getStatusBarHeight,
 } from "react-native-iphone-x-helper";
->>>>>>> 8593af8b50935e370ac85ed1d909100c0be49ba7
 import styled from "styled-components/native";
-import { DataListProsp } from ".";
-
-import { FlatList } from "react-native";
-import { DataListPros } from ".";
+import { DataListProps } from ".";
 
 export const Container = styled.View`
   flex: 1;
@@ -82,20 +75,11 @@ export const Title = styled.Text`
   margin-bottom: 16px;
 `;
 
-<<<<<<< HEAD
 export const TransactionList = styled(
-  FlatList as new () => FlatList<DataListProsp>
+  FlatList as new () => FlatList<DataListProps>
   ).attrs({
   showsVerticalScrollIndicator: false,
-          contentContainerStyle: {
-            paddingBottom: getBottomSpace()
-          }
-})``;
-=======
-export const TransactionList = styled(FlatList as new () => FlatList<DataListPros>).attrs({
-  showsVerticalScrollIndicator: false,
   contentContainerStyle: {
-    paddingBottom: getBottomSpace(),
-  },
+    paddingBottom: getBottomSpace()
+  }
 })``;
->>>>>>> 8593af8b50935e370ac85ed1d909100c0be49ba7

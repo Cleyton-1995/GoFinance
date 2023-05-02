@@ -34,12 +34,7 @@ export function TransactionsCards({ data }: Props) {
 
       <Amount type={data.type}>
         {data.type === "negative" && "- "}
-<<<<<<< HEAD
         {data.amount}</Amount>
-=======
-        {data.amount}
-      </Amount>
->>>>>>> 8593af8b50935e370ac85ed1d909100c0be49ba7
 
       <Footer>
         <Category>

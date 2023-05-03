@@ -1,0 +1,20 @@
+import styled from "styled-components/native";
+
+export const Container = styled.View`
+   
+`;
+export const Header = styled.View`
+   background-color: ${({theme}) => theme.colors.primmary};
+
+width: 100%;
+height: 113px;
+align-items: center;
+justify-content: center;
+padding-top: 67px;
+padding-bottom: 19px;
+`;
+export const Title = styled.Text`
+   font-family: ${({theme}) => theme.fonts.regular};
+   font-size: 18px;
+   color: ${({theme}) => theme.colors.shape};
+`;

@@ -10,7 +10,7 @@ export function Register() {
          <Title>Cadastro</Title>
       </Header>
 
-      <Input/>
+      <Input placeholder="Nome" />
     </Container>
   );
 }

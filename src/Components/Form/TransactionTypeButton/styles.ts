@@ -1,18 +1,34 @@
 import { Feather } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
+import { css } from "styled-components";
 import styled from "styled-components/native";
 
 interface IconsProps {
   type: "up" | "down";
 }
 
-export const Container = styled(TouchableOpacity)`
+interface ContainerProps {
+  isActive: boolean;
+  type: "up" | "down";
+}
+
+export const Container = styled(TouchableOpacity)<ContainerProps>`
   width: 48%;
   flex-direction: row;
   justify-content: center;
   border-radius: 5px;
-  border: 1.5px solid ${({ theme }) => theme.colors.text};
+  border-width: ${({isActive}) => isActive ? 0 : 1.5}px;
+  border-style: solid; 
+  border-color: ${({ theme }) => theme.colors.text};
   padding: 16px;
+
+  ${({isActive, type}) => isActive && type === "up" && css`
+      background-color: ${({ theme }) => theme.colors.success_light};
+  `}
+
+  ${({isActive, type}) => isActive && type === "down" && css`
+      background-color: ${({ theme }) => theme.colors.attention_light};
+  `}
 `;
 
 export const Title = styled.Text`

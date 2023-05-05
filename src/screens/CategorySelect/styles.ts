@@ -6,11 +6,11 @@ export const Container = styled.View`
   background-color: ${({ theme }) => theme.colors.background};
 `;
 export const Header = styled.View`
-  height: 113px;
+  height: 90px;
   width: 100%;
   background-color: ${({ theme }) => theme.colors.primmary};
   align-items: center;
-  padding-top: 67px;
+  padding-top: 42px;
   padding-bottom: 19px;
 `;
 export const Title = styled.Text`

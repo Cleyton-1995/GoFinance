@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { CategorySelect } from "./src/screens/CategorySelect";
+import { Register } from "./src/screens/Register";
 import { ThemeProvider } from "styled-components";
 import theme from "./src/global/styles/theme";
 import {
@@ -24,7 +24,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <CategorySelect />
+      <Register />
       <StatusBar style="light" translucent backgroundColor="transparent" />
     </ThemeProvider>
   );

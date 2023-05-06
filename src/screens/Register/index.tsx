@@ -11,7 +11,7 @@ import {
 import { Button } from "../../Components/Form/Button";
 import { TransactionTypeButton } from "../../Components/Form/TransactionTypeButton";
 import { CategorySelectButton } from "../../Components/Form/CategorySelectButton";
-import { Keyboard, Modal, TouchableWithoutFeedback } from "react-native";
+import { Alert, Keyboard, Modal, TouchableWithoutFeedback } from "react-native";
 import { CategorySelect } from "../CategorySelect";
 import { InputForm } from "../../Components/Form/InputForm";
 import { useForm } from "react-hook-form";
@@ -44,6 +44,12 @@ export function Register() {
   }
 
   function handleRegister(form: FormData) {
+    if(!transactionType)
+      return Alert.alert("Selecione o tipo da transação")
+
+    if(category.key === "category")
+    return Alert.alert("Selecione a categoria")
+
     const data = {
       name: form.name,
       amount: form.amount,

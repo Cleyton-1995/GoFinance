@@ -18,6 +18,10 @@ import { CategorySelect } from "../CategorySelect";
 export function Register() {
   const [transactionType, setTransactionType] = useState("");
   const [categoryModalOpen, setCategoryModalOpen] = useState(false);
+
+  const [name, setName] = useState("");
+  const [amount, setAmount] = useState("");
+
   const [category, setCategory] = useState({
     key: "category",
     name: "Categoria",
@@ -34,6 +38,16 @@ export function Register() {
     setCategoryModalOpen(false);
   }
 
+  function handleRegister() {
+    const data = {
+      name,
+      amount,
+      transactionType,
+      category: category.key
+    }
+    console.log(data)
+  }
+
   return (
     <Container>
       <Header>
@@ -42,8 +56,8 @@ export function Register() {
 
       <Form>
         <Fields>
-          <Input placeholder="Nome" />
-          <Input placeholder="Preço" />
+          <Input onChangeText={setName} placeholder="Nome" />
+          <Input onChangeText={setAmount} placeholder="Preço" />
           <TransactionTypes>
             <TransactionTypeButton
               title="Income"
@@ -64,7 +78,7 @@ export function Register() {
           />
         </Fields>
 
-        <Button title="Enviar" />
+        <Button onPress={handleRegister} title="Enviar" />
       </Form>
 
       <Modal visible={categoryModalOpen}>

@@ -6,7 +6,7 @@ export const Container = styled.View`
   background-color: ${({ theme }) => theme.colors.background};
 `;
 export const Header = styled.View`
-  height: 90px;
+  height: 89px;
   width: 100%;
   background-color: ${({ theme }) => theme.colors.primmary};
   align-items: center;

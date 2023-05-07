@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   Container,
   Header,
@@ -20,6 +20,7 @@ import {
   TransactionsCardsProps,
 } from "../../Components/TransactionsCards";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useFocusEffect } from "@react-navigation/native";
 
 export interface DataListProps extends TransactionsCardsProps {
   id: string;
@@ -43,7 +44,7 @@ export function Dashboard({ id }: DataListProps) {
         const date = Intl.DateTimeFormat("pt-BR", {
           day: "2-digit",
           month: "2-digit",
-          year: "2-digit",
+          year: "numeric",
         }).format(new Date(item.date));
 
         return {
@@ -63,6 +64,10 @@ export function Dashboard({ id }: DataListProps) {
   useEffect(() => {
     loadTransactions();
   }, []);
+
+  useFocusEffect(useCallback(() => {
+    loadTransactions();
+  },[]))
 
   return (
     <Container>

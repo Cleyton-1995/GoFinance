@@ -26,16 +26,38 @@ export interface DataListProps extends TransactionsCardsProps {
   id: string;
 }
 
+interface HeighLightProps {
+  amount: string;
+}
+
+interface HeighLightData {
+  entries: HeighLightProps;
+  expensives: HeighLightProps;
+  total: HeighLightProps;
+}
+
 export function Dashboard({ id }: DataListProps) {
-  const [data, setData] = useState<DataListProps[]>([]);
+  const [transactions, setTransactions] = useState<DataListProps[]>([]);
+  const [heighLightData, setHeighLightData] = useState<HeighLightData>(
+    {} as HeighLightData
+  );
 
   async function loadTransactions() {
     const dataKey = "@gofinances:transactions";
     const response = await AsyncStorage.getItem(dataKey);
     const transactions = response ? JSON.parse(response) : [];
 
+    let entriesTotal = 0;
+    let expensiveTotal = 0;
+
     const trasanctionsFormatted: DataListProps[] = transactions.map(
       (item: DataListProps) => {
+        if (item.type === "positive") {
+          entriesTotal += Number(item.amount);
+        } else {
+          expensiveTotal += Number(item.amount);
+        }
+
         const amount = Number(item.amount).toLocaleString("pt-BR", {
           style: "currency",
           currency: "BRL",
@@ -54,20 +76,45 @@ export function Dashboard({ id }: DataListProps) {
           type: item.type,
           category: item.category,
           date,
-        }
+        };
       }
     );
 
-    setData(trasanctionsFormatted)
+    setTransactions(trasanctionsFormatted);
+
+    const total = entriesTotal - expensiveTotal;
+
+    setHeighLightData({
+      entries: {
+        amount: entriesTotal.toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL",
+        }),
+      },
+      expensives: {
+        amount: expensiveTotal.toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL",
+        }),
+      },
+      total: {
+        amount: total.toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL",
+        }),
+      },
+    });
   }
 
   useEffect(() => {
     loadTransactions();
   }, []);
 
-  useFocusEffect(useCallback(() => {
-    loadTransactions();
-  },[]))
+  useFocusEffect(
+    useCallback(() => {
+      loadTransactions();
+    }, [])
+  );
 
   return (
     <Container>
@@ -88,19 +135,19 @@ export function Dashboard({ id }: DataListProps) {
         <HeihLightCard
           type="up"
           title="Entradas"
-          amount="R$ 17.400,00"
+          amount={heighLightData.entries.amount}
           lastTransaction="Última entrada dia 13 de abril"
         />
         <HeihLightCard
           type="down"
           title="Saída"
-          amount="R$ 1.259,00"
+          amount={heighLightData.expensives.amount}
           lastTransaction="Última saída dia 03 de abril"
         />
         <HeihLightCard
           type="total"
           title="Total"
-          amount="R$ 16.241,00"
+          amount={heighLightData.total.amount}
           lastTransaction="01 à 16 de abril"
         />
       </HeihLightCards>
@@ -108,7 +155,7 @@ export function Dashboard({ id }: DataListProps) {
       <Transactions>
         <Title>Listagem</Title>
         <TransactionList
-          data={data}
+          data={transactions}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => <TransactionsCards data={item} />}
         />

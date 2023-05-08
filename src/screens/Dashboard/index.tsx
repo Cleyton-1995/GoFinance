@@ -13,6 +13,7 @@ import {
   Transactions,
   Title,
   TransactionList,
+  LoadContainer,
 } from "./styles";
 import { HeihLightCard } from "../../Components/HeihLightCard";
 import {
@@ -21,6 +22,8 @@ import {
 } from "../../Components/TransactionsCards";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFocusEffect } from "@react-navigation/native";
+import { ActivityIndicator } from "react-native";
+import theme from "../../global/styles/theme";
 
 export interface DataListProps extends TransactionsCardsProps {
   id: string;
@@ -36,7 +39,8 @@ interface HeighLightData {
   total: HeighLightProps;
 }
 
-export function Dashboard({ id }: DataListProps) {
+export function Dashboard() {
+  const [isLoading, setIsLoading] = useState(true);
   const [transactions, setTransactions] = useState<DataListProps[]>([]);
   const [heighLightData, setHeighLightData] = useState<HeighLightData>(
     {} as HeighLightData
@@ -104,6 +108,8 @@ export function Dashboard({ id }: DataListProps) {
         }),
       },
     });
+
+    setIsLoading(false);
   }
 
   useEffect(() => {
@@ -118,48 +124,58 @@ export function Dashboard({ id }: DataListProps) {
 
   return (
     <Container>
-      <Header>
-        <UserWrapper>
-          <UserInfo>
-            <Photo source={{ uri: "https://github.com/Cleyton-1995.png" }} />
-            <User>
-              <UserGreeting>Olá, </UserGreeting>
-              <UserName>Cleyton</UserName>
-            </User>
-          </UserInfo>
-          <Icon name="power" />
-        </UserWrapper>
-      </Header>
+      {isLoading ? (
+        <LoadContainer>
+          <ActivityIndicator size="large" color={theme.colors.primmary} />
+        </LoadContainer>
+      ) : (
+        <>
+          <Header>
+            <UserWrapper>
+              <UserInfo>
+                <Photo
+                  source={{ uri: "https://github.com/Cleyton-1995.png" }}
+                />
+                <User>
+                  <UserGreeting>Olá, </UserGreeting>
+                  <UserName>Cleyton</UserName>
+                </User>
+              </UserInfo>
+              <Icon name="power" />
+            </UserWrapper>
+          </Header>
 
-      <HeihLightCards>
-        <HeihLightCard
-          type="up"
-          title="Entradas"
-          amount={heighLightData.entries.amount}
-          lastTransaction="Última entrada dia 13 de abril"
-        />
-        <HeihLightCard
-          type="down"
-          title="Saída"
-          amount={heighLightData.expensives.amount}
-          lastTransaction="Última saída dia 03 de abril"
-        />
-        <HeihLightCard
-          type="total"
-          title="Total"
-          amount={heighLightData.total.amount}
-          lastTransaction="01 à 16 de abril"
-        />
-      </HeihLightCards>
+          <HeihLightCards>
+            <HeihLightCard
+              type="up"
+              title="Entradas"
+              amount={heighLightData.entries.amount}
+              lastTransaction="Última entrada dia 13 de abril"
+            />
+            <HeihLightCard
+              type="down"
+              title="Saída"
+              amount={heighLightData.expensives.amount}
+              lastTransaction="Última saída dia 03 de abril"
+            />
+            <HeihLightCard
+              type="total"
+              title="Total"
+              amount={heighLightData.total.amount}
+              lastTransaction="01 à 16 de abril"
+            />
+          </HeihLightCards>
 
-      <Transactions>
-        <Title>Listagem</Title>
-        <TransactionList
-          data={transactions}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <TransactionsCards data={item} />}
-        />
-      </Transactions>
+          <Transactions>
+            <Title>Listagem</Title>
+            <TransactionList
+              data={transactions}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => <TransactionsCards data={item} />}
+            />
+          </Transactions>
+        </>
+      )}
     </Container>
   );
 }

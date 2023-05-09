@@ -99,7 +99,7 @@ export function Dashboard() {
           date,
         };
       }
-    );
+    ).reverse();
 
     setTransactions(trasanctionsFormatted);
 

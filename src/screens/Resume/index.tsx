@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Header, Title } from "./styles";
+import { Container, Content, Header, Title } from "./styles";
 import { HistoryCard } from "../../Components/HistoryCard";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { categories } from "../../utils/categories";
@@ -13,12 +13,16 @@ interface TransactionData {
 }
 
 interface CategoryData {
+  key: string;
   name: string;
   total: string;
+  color: string;
 }
 
 export function Resume() {
-   const [ totalByCategories, setTotalByCategories] = useState<CategoryData[]>([])
+  const [totalByCategories, setTotalByCategories] = useState<CategoryData[]>(
+    []
+  );
 
   async function loadData() {
     const dataKey = "@gofinances:transactions";
@@ -46,7 +50,9 @@ export function Resume() {
           currency: "BRL",
         });
         totalByCategory.push({
+          key: category.key,
           name: category.name,
+          color: category.color,
           total,
         });
       }
@@ -65,7 +71,18 @@ export function Resume() {
         <Title>Resumo por categoria</Title>
       </Header>
 
-      <HistoryCard title="Compras" amount="R$ 150,50" color="red" />
+      <Content>
+        {totalByCategories.map((item) => {
+          return (
+            <HistoryCard
+              key={item.key}
+              title={item.name}
+              amount={item.total}
+              color={item.color}
+            />
+          );
+        })}
+      </Content>
     </Container>
   );
 }

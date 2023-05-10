@@ -26,7 +26,7 @@ export const UserWrapper = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-top: ${getStatusBarHeight() + 28};
+  margin-top: 58px;
 `;
 export const UserInfo = styled.View`
   flex-direction: row;

@@ -45,7 +45,7 @@ export const MonthSelectIcon = styled(Feather)`
 
 export const Month = styled.Text`
   font-family: ${({ theme }) => theme.fonts.regular};
-  font-size: 20;
+  font-size: 20px;
 `;
 
 export const LoadContainer = styled.View`

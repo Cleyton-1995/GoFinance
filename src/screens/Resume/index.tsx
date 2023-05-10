@@ -4,6 +4,7 @@ import {
   Container,
   Content,
   Header,
+  LoadContainer,
   Month,
   MonthSelect,
   MonthSelectButton,
@@ -19,6 +20,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { addMonths, format, subMonths } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import { ActivityIndicator } from "react-native";
 
 interface TransactionData {
   type: "positive" | "negative";
@@ -38,12 +40,15 @@ interface CategoryData {
 }
 
 export function Resume() {
+  const [isLoading, setIsLoading] = useState(true);
   const [selectDate, setSelectData] = useState(new Date());
   const [totalByCategories, setTotalByCategories] = useState<CategoryData[]>(
     []
   );
 
   function handleDateChange(action: "next" | "prev") {
+    setIsLoading(true);
+
     if (action == "next") {
       setSelectData(addMonths(selectDate, 1));
     } else {
@@ -103,6 +108,7 @@ export function Resume() {
     });
 
     setTotalByCategories(totalByCategory);
+    setIsLoading(false);
   }
 
   useFocusEffect(
@@ -114,55 +120,60 @@ export function Resume() {
   return (
     <Container>
       <Header>
-        <Title>Resumo por categoria</Title>
+        <Title>Resumo das saídas</Title>
       </Header>
+      {isLoading ? (
+        <LoadContainer>
+          <ActivityIndicator size="large" color={theme.colors.primmary} />
+        </LoadContainer>
+      ) : (
+        <Content
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{
+            paddingHorizontal: 24,
+            paddingBottom: useBottomTabBarHeight(),
+          }}
+        >
+          <MonthSelect>
+            <MonthSelectButton onPress={() => handleDateChange("prev")}>
+              <MonthSelectIcon name="chevron-left" />
+            </MonthSelectButton>
 
-      <Content
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{
-          paddingHorizontal: 24,
-          paddingBottom: useBottomTabBarHeight(),
-        }}
-      >
-        <MonthSelect>
-          <MonthSelectButton onPress={() => handleDateChange("prev")}>
-            <MonthSelectIcon name="chevron-left" />
-          </MonthSelectButton>
+            <Month>{format(selectDate, "MMMM, yyyy", { locale: ptBR })}</Month>
 
-          <Month>{format(selectDate, "MMMM, yyyy", { locale: ptBR })}</Month>
+            <MonthSelectButton onPress={() => handleDateChange("next")}>
+              <MonthSelectIcon name="chevron-right" />
+            </MonthSelectButton>
+          </MonthSelect>
 
-          <MonthSelectButton onPress={() => handleDateChange("next")}>
-            <MonthSelectIcon name="chevron-right" />
-          </MonthSelectButton>
-        </MonthSelect>
-
-        <ChartConatiner>
-          <VictoryPie
-            data={totalByCategories}
-            colorScale={totalByCategories.map((category) => category.color)}
-            style={{
-              labels: {
-                fontSize: 18,
-                fontWeight: "bold",
-              },
-            }}
-            labelRadius={135}
-            x="percent"
-            y="total"
-          />
-        </ChartConatiner>
-
-        {totalByCategories.map((item) => {
-          return (
-            <HistoryCard
-              key={item.key}
-              title={item.name}
-              amount={item.totalFormatted}
-              color={item.color}
+          <ChartConatiner>
+            <VictoryPie
+              data={totalByCategories}
+              colorScale={totalByCategories.map((category) => category.color)}
+              style={{
+                labels: {
+                  fontSize: 18,
+                  fontWeight: "bold",
+                },
+              }}
+              labelRadius={135}
+              x="percent"
+              y="total"
             />
-          );
-        })}
-      </Content>
+          </ChartConatiner>
+
+          {totalByCategories.map((item) => {
+            return (
+              <HistoryCard
+                key={item.key}
+                title={item.name}
+                amount={item.totalFormatted}
+                color={item.color}
+              />
+            );
+          })}
+        </Content>
+      )}
     </Container>
   );
 }

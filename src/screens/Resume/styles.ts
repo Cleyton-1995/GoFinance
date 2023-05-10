@@ -47,3 +47,9 @@ export const Month = styled.Text`
   font-family: ${({ theme }) => theme.fonts.regular};
   font-size: 20;
 `;
+
+export const LoadContainer = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;

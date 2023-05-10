@@ -30,23 +30,20 @@ export const ChartConatiner = styled.SafeAreaView`
 `;
 
 export const MonthSelect = styled.View`
-   flex-direction: row;
-   width: 100%;
-   justify-content: space-between;
-   align-items: center;
-   margin-top: 24px;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
 `;
 
-export const MonthSelectButton = styled.TouchableOpacity`
-
-`;
+export const MonthSelectButton = styled.TouchableOpacity``;
 
 export const MonthSelectIcon = styled(Feather)`
-   font-size: 24px;
+  font-size: 24px;
 `;
 
 export const Month = styled.Text`
-   font-family: ${({theme}) => theme.fonts.regular};
-   font-size: 20;
+  font-family: ${({ theme }) => theme.fonts.regular};
+  font-size: 20;
 `;
-

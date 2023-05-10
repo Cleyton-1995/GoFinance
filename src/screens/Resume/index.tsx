@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import {
   ChartConatiner,
   Container,
@@ -17,6 +17,8 @@ import { VictoryPie } from "victory-native";
 import theme from "../../global/styles/theme";
 import { useFocusEffect } from "@react-navigation/native";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
+import { addMonths, format, subMonths } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 interface TransactionData {
   type: "positive" | "negative";
@@ -36,9 +38,20 @@ interface CategoryData {
 }
 
 export function Resume() {
+  const [selectDate, setSelectData] = useState(new Date());
   const [totalByCategories, setTotalByCategories] = useState<CategoryData[]>(
     []
   );
+
+  function handleDateChange(action: "next" | "prev") {
+    if (action == "next") {
+      setSelectData(addMonths(selectDate, 1));
+
+    } else {
+      setSelectData(subMonths(selectDate, 1));
+
+    }
+  }
 
   async function loadData() {
     const dataKey = "@gofinances:transactions";
@@ -111,13 +124,13 @@ export function Resume() {
         }}
       >
         <MonthSelect>
-          <MonthSelectButton>
+          <MonthSelectButton onPress={() => handleDateChange("prev")} >
             <MonthSelectIcon name="chevron-left" />
           </MonthSelectButton>
 
-          <Month>Maio</Month>
+          <Month>{ format(selectDate, "MMMM, yyyy", {locale: ptBR}) }</Month>
 
-          <MonthSelectButton>
+          <MonthSelectButton onPress={() => handleDateChange("next")} >
             <MonthSelectIcon name="chevron-right" />
           </MonthSelectButton>
         </MonthSelect>

@@ -46,10 +46,8 @@ export function Resume() {
   function handleDateChange(action: "next" | "prev") {
     if (action == "next") {
       setSelectData(addMonths(selectDate, 1));
-
     } else {
       setSelectData(subMonths(selectDate, 1));
-
     }
   }
 
@@ -59,7 +57,10 @@ export function Resume() {
     const responseFormatted = reponse ? JSON.parse(reponse) : [];
 
     const expensives = responseFormatted.filter(
-      (expensive: TransactionData) => expensive.type === "negative"
+      (expensive: TransactionData) =>
+        expensive.type === "negative" &&
+        new Date(expensive.date).getMonth() === selectDate.getMonth() &&
+        new Date(expensive.date).getFullYear() === selectDate.getFullYear()
     );
 
     const expensivesTotal = expensives.reduce(
@@ -107,7 +108,7 @@ export function Resume() {
   useFocusEffect(
     useCallback(() => {
       loadData();
-    }, [])
+    }, [selectDate])
   );
 
   return (
@@ -124,13 +125,13 @@ export function Resume() {
         }}
       >
         <MonthSelect>
-          <MonthSelectButton onPress={() => handleDateChange("prev")} >
+          <MonthSelectButton onPress={() => handleDateChange("prev")}>
             <MonthSelectIcon name="chevron-left" />
           </MonthSelectButton>
 
-          <Month>{ format(selectDate, "MMMM, yyyy", {locale: ptBR}) }</Month>
+          <Month>{format(selectDate, "MMMM, yyyy", { locale: ptBR })}</Month>
 
-          <MonthSelectButton onPress={() => handleDateChange("next")} >
+          <MonthSelectButton onPress={() => handleDateChange("next")}>
             <MonthSelectIcon name="chevron-right" />
           </MonthSelectButton>
         </MonthSelect>

@@ -6,6 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { VictoryPie } from "victory-native";
 import theme from "../../global/styles/theme";
 import { useFocusEffect } from "@react-navigation/native";
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 
 interface TransactionData {
   type: "positive" | "negative";
@@ -44,8 +45,6 @@ export function Resume() {
       },
       0
     );
-
-    console.log(expensivesTotal);
 
     const totalByCategory: CategoryData[] = [];
 
@@ -94,7 +93,13 @@ export function Resume() {
         <Title>Resumo por categoria</Title>
       </Header>
 
-      <Content>
+      <Content
+         showsVerticalScrollIndicator={false}
+         contentContainerStyle={{
+            paddingHorizontal: 24,
+            paddingBottom: useBottomTabBarHeight()
+         }}
+      >
         <ChartConatiner>
           <VictoryPie
             data={totalByCategories}

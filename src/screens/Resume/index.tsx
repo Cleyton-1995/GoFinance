@@ -1,5 +1,15 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { ChartConatiner, Container, Content, Header, Title } from "./styles";
+import {
+  ChartConatiner,
+  Container,
+  Content,
+  Header,
+  Month,
+  MonthSelect,
+  MonthSelectButton,
+  MonthSelectIcon,
+  Title,
+} from "./styles";
 import { HistoryCard } from "../../Components/HistoryCard";
 import { categories } from "../../utils/categories";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -82,10 +92,10 @@ export function Resume() {
   }
 
   useFocusEffect(
-   useCallback(() => {
-     loadData();
-   }, [])
- );
+    useCallback(() => {
+      loadData();
+    }, [])
+  );
 
   return (
     <Container>
@@ -94,12 +104,24 @@ export function Resume() {
       </Header>
 
       <Content
-         showsVerticalScrollIndicator={false}
-         contentContainerStyle={{
-            paddingHorizontal: 24,
-            paddingBottom: useBottomTabBarHeight()
-         }}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{
+          paddingHorizontal: 24,
+          paddingBottom: useBottomTabBarHeight(),
+        }}
       >
+        <MonthSelect>
+          <MonthSelectButton>
+            <MonthSelectIcon name="chevron-left" />
+          </MonthSelectButton>
+
+          <Month>Maio</Month>
+
+          <MonthSelectButton>
+            <MonthSelectIcon name="chevron-right" />
+          </MonthSelectButton>
+        </MonthSelect>
+
         <ChartConatiner>
           <VictoryPie
             data={totalByCategories}

@@ -1,3 +1,4 @@
+import { Feather } from "@expo/vector-icons";
 import styled from "styled-components/native";
 
 export const Container = styled.View`
@@ -27,3 +28,25 @@ export const ChartConatiner = styled.SafeAreaView`
   width: 100%;
   align-items: center;
 `;
+
+export const MonthSelect = styled.View`
+   flex-direction: row;
+   width: 100%;
+   justify-content: space-between;
+   align-items: center;
+   margin-top: 24px;
+`;
+
+export const MonthSelectButton = styled.TouchableOpacity`
+
+`;
+
+export const MonthSelectIcon = styled(Feather)`
+   font-size: 24px;
+`;
+
+export const Month = styled.Text`
+   font-family: ${({theme}) => theme.fonts.regular};
+   font-size: 20;
+`;
+

@@ -1,20 +1,29 @@
-import React from "react";
-import { Container, Footer, FooterWrapper, Header, SignInTitle, Title, TitleWrapper } from "./styles";
+import React, { useContext } from "react";
+import {
+  Container,
+  Footer,
+  FooterWrapper,
+  Header,
+  SignInTitle,
+  Title,
+  TitleWrapper,
+} from "./styles";
 
 import AppleSvg from "../../assets/apple.svg";
 import GoogleSvg from "../../assets/google.svg";
 import LogoSvg from "../../assets/logo.svg";
 import { SignInSocialButton } from "../../Components/SignInSocialButton";
+import { AuthContext } from "../../AuthContext";
 
 export function SignIn() {
+  const data = useContext(AuthContext);
+  console.log(data);
+
   return (
     <Container>
       <Header>
         <TitleWrapper>
-          <LogoSvg 
-           width="120" 
-           height="68"
-          />
+          <LogoSvg width="120" height="68" />
 
           <Title>
             Controle suas {"\n"}
@@ -24,22 +33,16 @@ export function SignIn() {
         </TitleWrapper>
 
         <SignInTitle>
-         Faça seu login com {"\n"}
-         uma das contas abaixo
+          Faça seu login com {"\n"}
+          uma das contas abaixo
         </SignInTitle>
       </Header>
 
       <Footer>
-         <FooterWrapper>
-            <SignInSocialButton
-               title="Entrar com Google"
-               svg={GoogleSvg}
-            />
-            <SignInSocialButton
-               title="Entrar com Apple"
-               svg={AppleSvg}
-            />
-         </FooterWrapper>
+        <FooterWrapper>
+          <SignInSocialButton title="Entrar com Google" svg={GoogleSvg} />
+          <SignInSocialButton title="Entrar com Apple" svg={AppleSvg} />
+        </FooterWrapper>
       </Footer>
     </Container>
   );

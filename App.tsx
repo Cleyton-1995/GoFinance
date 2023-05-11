@@ -13,6 +13,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { AppRoutes } from "./src/routes/app.routes";
 import { NavigationContainer } from "@react-navigation/native";
 import { SignIn } from "./src/screens/SignIn";
+import { AuthContext } from "./src/AuthContext";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -42,11 +43,11 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <NavigationContainer
-        onReady={onLayoutRootView}
-      >
+      <NavigationContainer onReady={onLayoutRootView}>
         {/* <AppRoutes /> */}
-        <SignIn />
+        <AuthContext.Provider value={[]}>
+          <SignIn />
+        </AuthContext.Provider>
       </NavigationContainer>
       <StatusBar style="light" translucent backgroundColor="transparent" />
     </ThemeProvider>

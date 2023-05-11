@@ -26,10 +26,15 @@ export const SignInTitle = styled.Text`
    font-size: 16px;
    text-align: center;
    margin-top: 40px;
-   margin-bottom: 40px;
+   margin-bottom: 50px;
 `;
 export const Footer = styled.View`
    width: 100%;
    height: 30%;
    background-color: ${({theme}) => theme.colors.secundary};
+`;
+export const FooterWrapper = styled.View`
+   margin-top: -30px;
+   padding: 0 32px;
+   justify-content: space-between;
 `;

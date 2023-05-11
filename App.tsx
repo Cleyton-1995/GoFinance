@@ -8,12 +8,11 @@ import {
   Poppins_500Medium,
   Poppins_700Bold,
 } from "@expo-google-fonts/poppins";
-import AppLoading from "expo-app-loading";
 import * as SplashScreen from "expo-splash-screen";
 import { AppRoutes } from "./src/routes/app.routes";
 import { NavigationContainer } from "@react-navigation/native";
 import { SignIn } from "./src/screens/SignIn";
-import { AuthContext } from "./src/AuthContext";
+import { AuthProvider } from "./src/hooks/auth";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -45,9 +44,9 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <NavigationContainer onReady={onLayoutRootView}>
         {/* <AppRoutes /> */}
-        <AuthContext.Provider value={[]}>
+        <AuthProvider>
           <SignIn />
-        </AuthContext.Provider>
+        </AuthProvider>
       </NavigationContainer>
       <StatusBar style="light" translucent backgroundColor="transparent" />
     </ThemeProvider>

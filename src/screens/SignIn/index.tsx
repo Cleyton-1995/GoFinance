@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import {
   Container,
   Footer,
@@ -13,12 +13,11 @@ import AppleSvg from "../../assets/apple.svg";
 import GoogleSvg from "../../assets/google.svg";
 import LogoSvg from "../../assets/logo.svg";
 import { SignInSocialButton } from "../../Components/SignInSocialButton";
-import { AuthContext } from "../../AuthContext";
+import { useAuth } from "../../hooks/auth";
 
 export function SignIn() {
-  const data = useContext(AuthContext);
-  console.log(data);
-
+  const {user} = useAuth();
+  console.log(user);
   return (
     <Container>
       <Header>

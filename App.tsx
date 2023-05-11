@@ -12,6 +12,7 @@ import AppLoading from "expo-app-loading";
 import * as SplashScreen from "expo-splash-screen";
 import { AppRoutes } from "./src/routes/app.routes";
 import { NavigationContainer } from "@react-navigation/native";
+import { SignIn } from "./src/screens/SignIn";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -44,7 +45,8 @@ export default function App() {
       <NavigationContainer
         onReady={onLayoutRootView}
       >
-        <AppRoutes />
+        {/* <AppRoutes /> */}
+        <SignIn />
       </NavigationContainer>
       <StatusBar style="light" translucent backgroundColor="transparent" />
     </ThemeProvider>

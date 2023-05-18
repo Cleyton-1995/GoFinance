@@ -12,12 +12,12 @@ interface User {
   photo?: string;
 }
 
-interface IAuthProviderProps {
+interface IAuthContextData {
   user: User;
   signInWithGoogle(): Promise<void>;
 }
 
-const AuthContext = createContext({} as IAuthProviderProps);
+const AuthContext = createContext({} as IAuthContextData);
 
 function AuthProvider({ children }: AuthProviderProps) {
   const user = {
@@ -40,12 +40,15 @@ function AuthProvider({ children }: AuthProviderProps) {
 
       console.log(response);
     } catch (error) {
-      // throw new Error(error);
+      throw new Error(error);
     }
   }
 
   return (
-    <AuthContext.Provider value={{ user, signInWithGoogle }}>
+    <AuthContext.Provider value={{ 
+      user, 
+      signInWithGoogle 
+    }}>
       {children}
     </AuthContext.Provider>
   );

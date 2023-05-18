@@ -13,6 +13,7 @@ import { AppRoutes } from "./src/routes/app.routes";
 import { NavigationContainer } from "@react-navigation/native";
 import { SignIn } from "./src/screens/SignIn";
 import { AuthProvider } from "./src/hooks/auth";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -41,14 +42,16 @@ export default function App() {
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <NavigationContainer onReady={onLayoutRootView}>
-        {/* <AppRoutes /> */}
-        <AuthProvider>
-          <SignIn />
-        </AuthProvider>
-      </NavigationContainer>
-      <StatusBar style="light" translucent backgroundColor="transparent" />
-    </ThemeProvider>
+    <GestureHandlerRootView style={{flex: 1}} >
+      <ThemeProvider theme={theme}>
+        <NavigationContainer onReady={onLayoutRootView}>
+          {/* <AppRoutes /> */}
+          <AuthProvider>
+            <SignIn />
+          </AuthProvider>
+        </NavigationContainer>
+        <StatusBar style="light" translucent backgroundColor="transparent" />
+      </ThemeProvider>
+    </GestureHandlerRootView>
   );
 }

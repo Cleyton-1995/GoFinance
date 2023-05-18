@@ -31,9 +31,8 @@ function AuthProvider({ children }: AuthProviderProps) {
 
   async function signInWithGoogle() {
     try {
-      const CLIENT_ID =
-        "411984150942-hvmjtdni43dks0sohbhrc1cqk4fd2gtd.apps.googleusercontent.com";
-      const REDIRECT_URI = "https://auth.expo.io/@cleyton-costa/GoFinances";
+      const { CLIENT_ID } = process.env;
+      const { REDIRECT_URI } = process.env;
       const RESPONSE_TYPE = "token";
       const SCOPE = encodeURI("profile email");
 
@@ -49,13 +48,15 @@ function AuthProvider({ children }: AuthProviderProps) {
         );
 
         const userInfo = await response.json();
-        
+
         setUser({
           id: userInfo.id,
           email: userInfo.email,
           name: userInfo.given_name,
-          photo: userInfo.picture
-        })
+          photo: userInfo.picture,
+        });
+
+        console.log(userInfo)
       }
     } catch (error) {
       throw new Error(error);

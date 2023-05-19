@@ -156,7 +156,7 @@ export function Resume() {
                   fontWeight: "bold",
                 },
               }}
-              labelRadius={135}
+              labelRadius={150}
               x="percent"
               y="total"
             />

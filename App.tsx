@@ -9,11 +9,10 @@ import {
   Poppins_700Bold,
 } from "@expo-google-fonts/poppins";
 import * as SplashScreen from "expo-splash-screen";
-import { AppRoutes } from "./src/routes/app.routes";
-import { NavigationContainer } from "@react-navigation/native";
 import { SignIn } from "./src/screens/SignIn";
 import { AuthProvider } from "./src/hooks/auth";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { Routes } from "./src/routes";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -42,14 +41,11 @@ export default function App() {
   }
 
   return (
-    <GestureHandlerRootView style={{flex: 1}} >
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemeProvider theme={theme}>
-        <NavigationContainer onReady={onLayoutRootView}>
-          {/* <AppRoutes /> */}
-          <AuthProvider>
-            <SignIn />
-          </AuthProvider>
-        </NavigationContainer>
+        <AuthProvider>
+          <Routes />
+        </AuthProvider>
         <StatusBar style="light" translucent backgroundColor="transparent" />
       </ThemeProvider>
     </GestureHandlerRootView>

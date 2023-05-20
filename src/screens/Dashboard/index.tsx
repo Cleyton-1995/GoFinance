@@ -48,7 +48,7 @@ export function Dashboard() {
     {} as HeighLightData
   );
 
-  const { signOut } = useAuth()
+  const { signOut, user } = useAuth();
 
   function getLastTransactionsDate(
     collection: DataListProps[],
@@ -63,7 +63,10 @@ export function Dashboard() {
       )
     );
 
-    return `${lastTransactions.getDate()} de ${lastTransactions.toLocaleString("pt-BR", { month: "long" })}`;
+    return `${lastTransactions.getDate()} de ${lastTransactions.toLocaleString(
+      "pt-BR",
+      { month: "long" }
+    )}`;
   }
 
   async function loadTransactions() {
@@ -74,8 +77,8 @@ export function Dashboard() {
     let entriesTotal = 0;
     let expensiveTotal = 0;
 
-    const trasanctionsFormatted: DataListProps[] = transactions.map(
-      (item: DataListProps) => {
+    const trasanctionsFormatted: DataListProps[] = transactions
+      .map((item: DataListProps) => {
         if (item.type === "positive") {
           entriesTotal += Number(item.amount);
         } else {
@@ -101,8 +104,8 @@ export function Dashboard() {
           category: item.category,
           date,
         };
-      }
-    ).reverse();
+      })
+      .reverse();
 
     setTransactions(trasanctionsFormatted);
 
@@ -114,7 +117,7 @@ export function Dashboard() {
       transactions,
       "negative"
     );
-    const totalInterval = `01 a ${lastTransactionsExpensives}`
+    const totalInterval = `01 a ${lastTransactionsExpensives}`;
 
     const total = entriesTotal - expensiveTotal;
 
@@ -162,12 +165,10 @@ export function Dashboard() {
           <Header>
             <UserWrapper>
               <UserInfo>
-                <Photo
-                  source={{ uri: "https://github.com/Cleyton-1995.png" }}
-                />
+                <Photo source={{ uri: user.photo }} />
                 <User>
                   <UserGreeting>Olá, </UserGreeting>
-                  <UserName>Cleyton</UserName>
+                  <UserName>{user.name}</UserName>
                 </User>
               </UserInfo>
               <Icon onPress={signOut} name="power" />

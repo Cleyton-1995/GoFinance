@@ -17,25 +17,30 @@ import { useAuth } from "../../hooks/auth";
 import { Alert } from "react-native";
 
 export function SignIn() {
-  const { signInWithGoogle } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
+  const { signInWithGoogle, signInWithApple } = useAuth();
 
   async function handleSignInWithGoogle() {
     try {
+      setIsLoading(true);
       await signInWithGoogle();
     } catch (error) {
       console.log(error);
       Alert.alert("Não foi possível conectar na conta Google");
+    } finally {
+      setIsLoading(false);
     }
   }
 
-  const { signInWithApple } = useAuth();
-
   async function handleSignInWithApple() {
     try {
+      setIsLoading(true);
       await signInWithApple();
     } catch (error) {
       console.log(error);
       Alert.alert("Não foi possível conectar na conta Apple");
+    } finally {
+      setIsLoading(false);
     }
   }
 

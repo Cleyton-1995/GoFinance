@@ -33,7 +33,9 @@ export function Routes() {
     }
   }, [fontsLoaded]);
 
-  if (!fontsLoaded) {
+  const { userStorageLoading } = useAuth()
+
+  if (!fontsLoaded  || userStorageLoading) {
     return null;
   }
 

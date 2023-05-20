@@ -39,6 +39,8 @@ export const Photo = styled.Image`
 `;
 export const User = styled.View`
   margin-left: 17px;
+  height: 25px;
+  margin-top: -25px;
 `;
 export const UserGreeting = styled.Text`
   color: ${({ theme }) => theme.colors.shape};

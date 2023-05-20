@@ -21,6 +21,7 @@ import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { addMonths, format, subMonths } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { ActivityIndicator } from "react-native";
+import { useAuth } from "../../hooks/auth";
 
 interface TransactionData {
   type: "positive" | "negative";
@@ -46,6 +47,8 @@ export function Resume() {
     []
   );
 
+  const { user } = useAuth();
+
   function handleDateChange(action: "next" | "prev") {
     setIsLoading(true);
 
@@ -57,7 +60,7 @@ export function Resume() {
   }
 
   async function loadData() {
-    const dataKey = "@gofinances:transactions";
+    const dataKey = `@gofinances:transactions_user:${user.id}`;
     const reponse = await AsyncStorage.getItem(dataKey);
     const responseFormatted = reponse ? JSON.parse(reponse) : [];
 

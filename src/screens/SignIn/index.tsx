@@ -16,6 +16,7 @@ import { SignInSocialButton } from "../../Components/SignInSocialButton";
 import { useAuth } from "../../hooks/auth";
 import { ActivityIndicator, Alert } from "react-native";
 import theme from "../../global/styles/theme";
+import { Platform } from "react-native";
 
 export function SignIn() {
   const [isLoading, setIsLoading] = useState(false);
@@ -70,11 +71,15 @@ export function SignIn() {
             title="Entrar com Google"
             svg={GoogleSvg}
           />
-          <SignInSocialButton
-            onPress={handleSignInWithApple}
-            title="Entrar com Apple"
-            svg={AppleSvg}
-          />
+          
+          {
+            Platform.OS === "ios" &&
+            <SignInSocialButton
+              onPress={handleSignInWithApple}
+              title="Entrar com Apple"
+              svg={AppleSvg}
+            />
+          }
         </FooterWrapper>
 
         {isLoading && (
